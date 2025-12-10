@@ -1,102 +1,103 @@
-# 🚀 User Registration System (Fullstack Project)
+# 🚀 Secure Authentication & User Management System
 
-Dự án Hệ thống Đăng ký và Quản lý người dùng hoàn chỉnh. Dự án bao gồm Backend xây dựng bằng **NestJS** và Frontend xây dựng bằng **ReactJS**.
+**(Hệ thống Xác thực & Quản lý người dùng Fullstack)**
 
-![Status](https://img.shields.io/badge/Status-Completed-success) ![Node](https://img.shields.io/badge/Node.js-v18+-green)
+![React](https://img.shields.io/badge/Frontend-ReactJS-blue?style=for-the-badge&logo=react)
+![NestJS](https://img.shields.io/badge/Backend-NestJS-red?style=for-the-badge&logo=nestjs)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-green?style=for-the-badge&logo=mongodb)
+![TailwindCSS](https://img.shields.io/badge/Style-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+
+> Dự án Fullstack hoàn chỉnh mô phỏng quy trình xác thực (Authentication) bảo mật cao theo tiêu chuẩn công nghiệp, sử dụng cơ chế **JWT (Access Token + Refresh Token)**.
+
+---
 
 ## 📋 Mục lục
 
-1. [Giới thiệu](#-giới-thiệu)
-2. [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
-3. [Cấu trúc dự án](#-cấu-trúc-dự-án)
-4. [Yêu cầu cài đặt](#-yêu-cầu-cài-đặt)
-5. [Hướng dẫn cài đặt & Chạy (Local)](#-hướng-dẫn-cài-đặt--chạy-local)
-6. [API Endpoints](#-api-endpoints)
-7. [Tác giả](#-tác-giả)
+1. [Giới thiệu dự án](#-giới-thiệu-dự-án)
+2. [Tính năng nổi bật](#-tính-năng-nổi-bật)
+3. [Kiến trúc & Công nghệ](#-kiến-trúc--công-nghệ)
+4. [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
+5. [Yêu cầu tiên quyết](#-yêu-cầu-tiên-quyết)
+6. [Hướng dẫn cài đặt & Chạy (Local)](#-hướng-dẫn-cài-đặt--chạy-local)
+7. [Biến môi trường (.env)](#-cấu-hình-biến-môi-trường)
+8. [API Documentation](#-api-documentation)
 
 ---
 
-## 📖 Giới thiệu
+## 📖 Giới thiệu dự án
 
-Đây là bài tập/đồ án (IA03) với mục tiêu xây dựng quy trình đăng ký người dùng Fullstack:
+Đây không chỉ là một form đăng ký đơn giản. Dự án này giải quyết bài toán khó nhất trong lập trình Web: **Quản lý phiên đăng nhập an toàn**.
 
--  Người dùng nhập thông tin (Email, Password) từ giao diện React.
--  Dữ liệu được Validate (kiểm tra) ở cả Frontend và Backend.
--  Backend mã hóa mật khẩu và lưu trữ vào MongoDB.
--  Giao diện phản hồi trạng thái (Thành công/Thất bại) theo thời gian thực.
+Hệ thống hoạt động với luồng dữ liệu khép kín:
+
+1. **Frontend:** Giao diện ReactJS hiện đại, quản lý state server với React Query, xử lý API với Axios Interceptor.
+2. **Backend:** NestJS API mạnh mẽ, validation chặt chẽ, bảo mật với Guards và Strategies.
+3. **Database:** Lưu trữ phi cấu trúc với MongoDB.
 
 ---
 
-## 🛠 Công nghệ sử dụng
+## ✨ Tính năng nổi bật
 
-### Backend (`pos_backend`)
+### 🔐 Authentication (Bảo mật)
 
--  **Framework:** NestJS (Node.js)
--  **Database:** MongoDB
--  **ORM:** Mongoose
--  **Security:** Bcrypt (Hashing Password), CORS enabled
--  **Validation:** class-validator, class-transformer
+-  **Đăng ký & Đăng nhập:** Validate dữ liệu đầu vào chặt chẽ (Email, Password mạnh).
+-  **JWT Standard:** Sử dụng cặp `Access Token` (lưu RAM - ngắn hạn) và `Refresh Token` (lưu LocalStorage - dài hạn).
+-  **Auto Refresh Token:** Khi Access Token hết hạn, Axios Interceptor tự động bắt lỗi 401 và gọi API lấy token mới mà không làm gián đoạn trải nghiệm người dùng.
+-  **Secure Logout:** Cơ chế đăng xuất sạch sẽ, xóa token ở cả Client và State.
+
+### 💻 Frontend Experience (Trải nghiệm người dùng)
+
+-  **Protected Routes:** Ngăn chặn truy cập trái phép vào các trang nội bộ (Profile/Dashboard).
+-  **Modern UI:** Thiết kế với Tailwind CSS, Responsive trên Mobile/Desktop.
+-  **Glassmorphism Effect:** Hiệu ứng giao diện kính mờ, background động đẹp mắt.
+-  **Smart State:** Sử dụng `TanStack Query` để cache dữ liệu và quản lý trạng thái tải (Loading/Error).
+
+### ⚙️ Backend Power (Hiệu năng)
+
+-  **Validation Pipe:** Kiểm soát dữ liệu đầu vào bằng `class-validator` (DTO).
+-  **CORS Configuration:** Cấu hình bảo mật chia sẻ tài nguyên (hỗ trợ deploy tách biệt Front/Back).
+-  **Error Handling:** Trả về thông báo lỗi chuẩn hóa, dễ debug.
+
+---
+
+## 🛠 Kiến trúc & Công nghệ
 
 ### Frontend (`pos_frontend`)
 
--  **Framework:** ReactJS (Vite)
--  **Styling:** Tailwind CSS (Responsive, Modern UI)
--  **State/API Management:** React Query (Tanstack Query)
--  **Form Handling:** React Hook Form
--  **HTTP Client:** Axios
--  **Icons:** Lucide React, FontAwesome
+-  **Core:** ReactJS (Vite Build Tool)
+-  **State Management:** React Query (TanStack Query v5)
+-  **Routing:** React Router DOM v6
+-  **HTTP Client:** Axios (Custom Instance & Interceptors)
+-  **Forms:** React Hook Form
+-  **UI/UX:** Tailwind CSS, Lucide React Icons
 
-## ⚙️ Yêu cầu cài đặt
+### Backend (`pos_backend`)
 
-Trước khi bắt đầu, hãy đảm bảo máy tính của bạn đã cài đặt:
-
-1. **Node.js**: Phiên bản 18 trở lên (Khuyên dùng v20 LTS).
-2. **Git**: Để tải dự án về.
-3. **MongoDB**:
-   -  Cách 1: Cài MongoDB Community Server trên máy.
-   -  Cách 2: Có tài khoản MongoDB Atlas (Cloud).
+-  **Core:** NestJS Framework
+-  **Database:** MongoDB (Mongoose ODM)
+-  **Security:** Passport-JWT, Bcrypt
+-  **API Docs:** Swagger (Optional)
 
 ---
 
-## 📥 Hướng dẫn cài đặt & Chạy (Local)
-
-Để chạy dự án, bạn cần mở **2 cửa sổ Terminal** riêng biệt (một cho Backend, một cho Frontend).
-
-### Bước 1: Cài đặt & Chạy Backend (Server)
-
-Di chuyển vào thư mục backend và cài đặt các thư viện:
+## 📂 Cấu trúc thư mục
 
 ```bash
-cd pos_backend
-npm install
-```
-
-Quan trọng: Cấu hình biến môi trường.
-
-Tạo một file tên là .env ngay tại thư mục pos_backend.
-
-Dán nội dung sau vào file .env:
-
-```bash
-# Nếu dùng MongoDB cài trên máy (Localhost):
-MONGO_URI=mongodb://127.0.0.1:27017/user_db
-
-# Nếu dùng MongoDB Atlas (Cloud):
-# MONGO_URI=mongodb+srv://user:pass@cluster...
-```
-
-Sau đó khởi động server:
-
-```bash
-npm run start:dev
-```
-
-### Bước 2: Mở frontend:
-
-Di chuyển vào thư mục frontend:
-
-```bash:
-cd pos_frontend
-npm install
-npm run dev
+Project-Fullstack/
+├── pos_backend/          # Source code Backend (NestJS)
+│   ├── src/
+│   │   ├── auth/         # Module xử lý Login/Register/Refresh
+│   │   ├── users/        # Module quản lý User Schema
+│   │   ├── app.module.ts # Root Module
+│   │   └── main.ts       # Entry point (CORS config)
+│   └── .env              # Biến môi trường Backend
+│
+└── pos_frontend/         # Source code Frontend (ReactJS)
+    ├── src/
+    │   ├── api/          # Cấu hình Axios & Interceptors
+    │   ├── components/   # Header, ProtectedRoute...
+    │   ├── context/      # AuthContext (Global State)
+    │   ├── pages/        # Login, Register, Home, Profile
+    │   └── App.jsx       # Routing config
+    └── .env              # Biến môi trường Frontend
 ```
