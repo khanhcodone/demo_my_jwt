@@ -160,3 +160,11 @@ JWT_EXPIRATION=15m
 JWT_REFRESH_SECRET=Bi_Mat_Refresh_Token
 JWT_REFRESH_EXPIRATION=7d
 ```
+
+### 🌐 Deployment (Demo)
+
+Dự án đã được deploy công khai tại:
+
+Frontend (Vercel): https://demo-my-jwt.vercel.app
+
+Backend (Render): https://demo-my-jwt.onrender.com
