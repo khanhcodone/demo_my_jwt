@@ -2,7 +2,7 @@ import axios from "axios";
 // import { jwtDecode } from "jwt-decode"; // Mở nếu cần check hạn token ở client
 
 // 1. CẤU HÌNH URL TỰ ĐỘNG (Localhost hoặc Server)
-const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const BACKEND_URL = "https://my-backend-api-1mvw.onrender.com";
 
 console.log("🔗 API URL:", BACKEND_URL); // Log để kiểm tra đang chạy link nào
 
