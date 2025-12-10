@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* XÓA HẾT các dòng như :root, body, #root... bên dưới nếu có */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  /* Chặn thanh cuộn ngang thừa */
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  /* Giúp nội dung bên trong (App) flex dọc */
+  flex-direction: column;
+  min-height: 100vh;
+}
