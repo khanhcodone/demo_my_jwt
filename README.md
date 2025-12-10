@@ -101,3 +101,62 @@ Project-Fullstack/
     │   └── App.jsx       # Routing config
     └── .env              # Biến môi trường Frontend
 ```
+
+### ⚙️ Yêu cầu tiên quyết
+
+Node.js: v18 trở lên.
+
+MongoDB: Đã cài đặt MongoDB Community hoặc có tài khoản MongoDB Atlas.
+
+Git: Để quản lý source code.
+
+### 📥 Hướng dẫn cài đặt & Chạy (Local)
+
+Bạn cần mở 2 cửa sổ Terminal riêng biệt.
+
+1. Thiết lập Backend (Server)
+
+```bash
+# 1. Di chuyển vào thư mục backend
+cd pos_backend
+
+# 2. Cài đặt thư viện
+npm install
+
+# 3. Tạo file .env và cấu hình (Xem mục Biến môi trường bên dưới)
+
+# 4. Chạy server (Mặc định cổng 3000)
+npm run start:dev
+```
+
+2. Thiết lập Frontend (Client)
+
+```bash
+# 1. Di chuyển vào thư mục frontend
+cd pos_frontend
+
+# 2. Cài đặt thư viện
+npm install
+
+# 3. Tạo file .env và cấu hình API URL (Xem mục Biến môi trường bên dưới)
+
+# 4. Chạy ứng dụng
+npm run dev
+```
+
+🔧 Cấu hình Biến môi trường
+
+Backend (pos_backend/.env)
+Tạo file .env trong thư mục pos_backend:
+
+```bash
+# Kết nối MongoDB (Local hoặc Atlas)
+MONGO_URI=mongodb://127.0.0.1:27017/user_db
+# Hoặc: MONGO_URI=mongodb+srv://user:pass@cluster...
+
+# Secret Key để mã hóa Token (Tùy chọn chuỗi bất kỳ)
+JWT_SECRET=Sieu_Bi_Mat_Khong_Duoc_Tiet_Lo
+JWT_EXPIRATION=15m
+JWT_REFRESH_SECRET=Bi_Mat_Refresh_Token
+JWT_REFRESH_EXPIRATION=7d
+```

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { setAccessToken } from "../api/axiosClient"; // 👈 Nhớ import hàm này để xóa token trong RAM khi logout
+import { setAccessToken } from "../api/axiosClient";
+import { useQueryClient } from "@tanstack/react-query";
 
 // 1. Tạo Context
 const AuthContext = createContext();
@@ -10,6 +11,7 @@ export const AuthProvider = ({ children }) => {
    const [isAuthenticated, setIsAuthenticated] = useState(false);
    const [isLoading, setIsLoading] = useState(true); // Thêm trạng thái loading để tránh màn hình nhấp nháy khi F5
 
+   const queryClient = useQueryClient();
    // Kiểm tra lúc mới vào web (F5 trang)
    useEffect(() => {
       const checkLogin = () => {
@@ -29,7 +31,6 @@ export const AuthProvider = ({ children }) => {
       checkLogin();
    }, []);
 
-   // 👇 SỬA 2: Hàm Login phải nhận data user để lưu vào state
    const login = (userData) => {
       setUser(userData);
       setIsAuthenticated(true);
@@ -50,6 +51,8 @@ export const AuthProvider = ({ children }) => {
       // 3. Reset State
       setUser(null);
       setIsAuthenticated(false);
+      // xoá user
+      queryClient.clear();
    };
 
    return (
